@@ -11,13 +11,13 @@ echo "Bootstrap container: $BOOTSTRAP_CONTAINER"
 git submodule init && git submodule update --remote
 
 # Adding the docker-compose to the dataverse submodule
-cp utils/dataverse/dot_env utils/dataverse/.env
+cp dataverse/dot_env dataverse/.env
 
 # Create Traefik network
 docker network create traefik
 
 # Upping the Dataverse stack.
-docker compose -f utils/dataverse/docker-compose.yml up -d
+docker compose -f dataverse/docker-compose.yml up -d
 
 # Setup traefik container
 docker compose -f utils/traefik/docker-compose.yml up -d
@@ -124,6 +124,11 @@ docker exec "$DATAVERSE_CONTAINER" curl -X PUT --upload-file cvocconf.json http:
 docker exec "$DATAVERSE_CONTAINER" mkdir /opt/payara/deployments/dataverse/custom
 docker cp utils/external_vocabularies/skosmos.js "$DATAVERSE_CONTAINER":/opt/payara/deployments/dataverse/custom/skosmos.js
 echo "--- cvocconf setup complete!"
+
+# Install exporter jar files
+echo "--- Installing exporter jar files..."
+sh utils/dataverse/install_exporters.sh
+echo "--- Exporter jar files copied!"
 
 # Copy dataset.xhtml with file and version tab removed to volume.
 echo "--- Copying dataset.xhtml with file and version tab removed..."
