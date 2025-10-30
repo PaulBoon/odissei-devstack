@@ -172,7 +172,7 @@ def create_odissei_dataverses(dataverse_url, api_token):
     json_paths_dv_nl = [
         "avans.json", "delft.json", "fontys.json", "groningen.json",
         "hanze.json", "hr.json", "leiden.json", "maastricht.json",
-        "tilburg.json", "trimbos.json", "twente.json", "umcu.json",
+        "tilburg.json", "umcu.json",
         "utrecht.json", "vu.json"
     ]
 
@@ -215,7 +215,7 @@ def main():
     # publish the dataverses under DV_NL
     sub_level_aliases = [
         "AvansHogeschool", "delft", "fontys", "groningen", "hanze", "hr",
-        "leidenuniversity", "maastricht", "tiu", "trimbos", "twente",
+        "leidenuniversity", "maastricht", "tiu",
         "umcu", "UU", "vuamsterdam"
     ]
     for alias in sub_level_aliases:

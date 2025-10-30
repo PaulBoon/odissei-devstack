@@ -13,7 +13,7 @@ CURRENT_DIR="$(pwd)"
 cd "$SCRIPT_DIR" || exit 1
 
 echo "--- Running Python scripts with Poetry..."
-poetry install
+poetry install --no-root
 poetry run python create_dataverses.py "$ROOT_URL" "$api_token"
 poetry run python import-licenses.py "$ROOT_URL" "$api_token"
 echo "--- Python scripts completed!"
